@@ -25,3 +25,11 @@ Route::get('/timeline', 'TweetController@showTimelinePage')->name('timeline');
 Route::post('/timeline', 'TweetController@postTweet');
 
 Route::post('/timeline/delete/{id}', 'TweetController@destroy')->name('destroy');
+
+Route::get('/user/show/{id}', 'UserController@show')->name('show');
+
+// いいねをするためのルーティング
+Route::get('/tweets/{tweet_id}/likes', 'LikeController@store');
+
+// いいねを取り消すためのルーティング
+Route::get('/likes/{like_id}', 'LikeController@destroy');
