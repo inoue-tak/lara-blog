@@ -6,8 +6,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-use Illuminate\Database\Eloquent\Model;
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -18,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','avatar',
     ];
 
     /**
@@ -39,14 +37,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
-
-    /**
-     * ユーザーに紐づくプロファイル情報を取得
-     */
-    public function Profile()
+    public function tweets()
     {
-        return $this->hasOne('App/Profile');
+        return $this->hasMany('App\Tweet');
     }
 
+    public function likes()
+    {
+        return $this->hasMany('App\Like');
+    }
 }

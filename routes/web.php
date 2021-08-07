@@ -17,12 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/comments/create/{post_id}','CommentController@create')->name('comments.create');
-Route::post('/comments','CommentController@store')->name('comments.store');
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/timeline', 'TweetController@showTimelinePage')->name('timeline');
+Route::post('/timeline', 'TweetController@postTweet');
 
-Route::resource('posts', 'PostController');
+Route::post('/timeline/delete/{id}', 'TweetController@destroy')->name('destroy');
